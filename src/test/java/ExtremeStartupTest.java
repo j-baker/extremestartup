@@ -38,4 +38,9 @@ public class ExtremeStartupTest {
         assertThat(server.answer("who played James Bond in the film Dr No"), is("Sean Connery"));
     }
 
+
+    @Test
+    public void should_be_7th_prime() {
+        assertThat(server.answer("what is the 7th number in the Fibonacci sequence"), is("13"));
+    }
 }
