@@ -85,4 +85,39 @@ public class ExtremeStartup extends HttpServlet {
     	}
     	return max;
     }
+    boolean isSquare(int i) {
+        int j = 0;
+        while (j*j < i) {
+            j++;
+        }
+        if (j*j == i) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean isCube(int i) {
+        int j = 0;
+        while (j*j*j < i) {
+            j++;
+        }
+        if (j*j*j == i) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean isSquareAndCube(int i) {
+        return isSquare(i) && isSquare(i);
+    }
+
+    String whichOneIsSquareAndCube(String s) {
+        String[] split = s.split(", ");
+        for (int i = 0; i < split.length; i++) {
+            if (isSquareAndCube(Integer.parseInt(split[i]))) {
+                return "" + Integer.parseInt(split[i]);
+            }
+        }
+        return "" + Integer.MAX_VALUE;
+    }
 }
