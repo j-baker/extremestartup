@@ -17,7 +17,13 @@ public class ExtremeStartup extends HttpServlet {
         String parameter = req.getParameter("q");
         System.out.println("Request");
         
-        resp.getWriter().write(answer(parameter));
+        try {
+			resp.getWriter().write(answer(parameter));
+		} catch (Exception e) {
+			resp.getWriter().write("");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     Optional<String> tryAnswer(String parameter) {
@@ -38,7 +44,7 @@ public class ExtremeStartup extends HttpServlet {
         return Optional.empty();
     }
 
-    String answer(String parameter) {
+    String answer(String parameter) throws Exception {
         if (parameter == null)
             return "A";
 
@@ -64,12 +70,12 @@ public class ExtremeStartup extends HttpServlet {
                     - Integer.parseInt(additionMatcher3.group(2)));
         }
 
-        Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (\\*)").matcher(parameter);
+        Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (.*)").matcher(parameter);
         if (additionMatcher2.matches()) {
         	return "" + largest(additionMatcher2.group(1));
         }
 
-        Matcher j = Pattern.compile(".*which of the following numbers is both a square and a cube: (\\*)").matcher(parameter);
+        Matcher j = Pattern.compile(".*which of the following numbers is both a square and a cube: (.*)").matcher(parameter);
         if (j.matches()) {
         	return "" + whichOneIsSquareAndCube(j.group(1));
         }
@@ -81,9 +87,9 @@ public class ExtremeStartup extends HttpServlet {
 		if (b.isPresent()) {return b.get();}
 
         
-        Matcher c = Pattern.compile(".*which of the following numbers are primes: (\\*)").matcher(parameter);
+        Matcher c = Pattern.compile(".*which of the following numbers are primes: (.*)").matcher(parameter);
         if (c.matches()) {
-        	return "" + whichOnesArePrimes(j.group(1));
+        	return "" + whichOnesArePrimes(j.group(0));
         }
 
 		Optional<String> d = memoize(".*who is the Prime Minister of Great Britain", "David Cameron", parameter);
@@ -92,10 +98,22 @@ public class ExtremeStartup extends HttpServlet {
 		Optional<String> e = memoize(".*what is the 7th number in the Fibonacci sequence", "13", parameter);
 		if (e.isPresent()) {return e.get();}
 		
+		
 
-        Matcher f = Pattern.compile(".*what is the (\\d)th number in the Fibonacci sequence").matcher(parameter);
+        Matcher f = Pattern.compile(".*what is the (\\d+)th number in the Fibonacci sequence").matcher(parameter);
         if (f.matches()) {
         	return "" + fib(new Integer(f.group(1)));
+        }
+
+		Optional<String> g = memoize(".*what color is a banana", "Yellow", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+
+        Matcher h = Pattern.compile(".*what is (\\d+) to the power of (\\d+)").matcher(parameter);
+        if (h.matches()) {
+        	Integer num = Integer.parseInt(additionMatcher3.group(0));
+        	Integer num2 =  Integer.parseInt(additionMatcher3.group(1));
+            return String.valueOf((int) Math.pow(num, num2));
         }
         
         System.err.println("Unknown q" + parameter);
