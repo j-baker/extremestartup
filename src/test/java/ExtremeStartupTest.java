@@ -20,4 +20,15 @@ public class ExtremeStartupTest {
     public void should_get_largest() {
         assertEquals(server.answer("which of the following numbers is the largest: 12, 15"), "15");
     }
+
+    @Test
+    public void should_return_no_cube() {
+        assertEquals(server.answer("which of the following numbers is both a square and a cube: 36, 144"), "None");
+    }
+
+    @Test
+    public void shoud_be_sean_connery() {
+        assertEquals(server.answer("who played James Bond in the film Dr No"), "Sean Connery");
+    }
+
 }
