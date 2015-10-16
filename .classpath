@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry sourcepath="/Users/dfox/.gradle/caches/artifacts-26/filestore/org.eclipse.jetty.aggregate/jetty-webapp/7.6.0.v20120127/source/fa6ef37f0172891e8236431b0b7148719dbc703d/jetty-webapp-7.6.0.v20120127-sources.jar" kind="lib" path="/Users/dfox/.gradle/caches/artifacts-26/filestore/org.eclipse.jetty.aggregate/jetty-webapp/7.6.0.v20120127/jar/501dd32e89947196176f85c60bb109e71cc25eb1/jetty-webapp-7.6.0.v20120127.jar" exported="true"/>
+	<classpathentry sourcepath="/Users/dfox/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/17.0/source/7ca0efbeb87ca845b5d7a0ac9c21a4b7b95f7b28/guava-17.0-sources.jar" kind="lib" path="/Users/dfox/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/17.0/bundle/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar" exported="true"/>
+	<classpathentry sourcepath="/Users/dfox/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/source/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar" kind="lib" path="/Users/dfox/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/jar/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar" exported="true"/>
+	<classpathentry sourcepath="/Users/dfox/.gradle/caches/artifacts-26/filestore/junit/junit/4.8.2/source/cccca612a66b8387c399be31d69daf000de2ac9e/junit-4.8.2-sources.jar" kind="lib" path="/Users/dfox/.gradle/caches/artifacts-26/filestore/junit/junit/4.8.2/jar/c94f54227b08100974c36170dcb53329435fe5ad/junit-4.8.2.jar" exported="true"/>
+	<classpathentry sourcepath="/Users/dfox/.gradle/caches/artifacts-26/filestore/org.hamcrest/hamcrest-all/1.3/source/47e033b7ab18c5dbd5fe29fc1bd5a40afe028818/hamcrest-all-1.3-sources.jar" kind="lib" path="/Users/dfox/.gradle/caches/artifacts-26/filestore/org.hamcrest/hamcrest-all/1.3/jar/63a21ebc981131004ad02e0434e799fd7f3a8d5a/hamcrest-all-1.3.jar" exported="true"/>
+	<classpathentry sourcepath="/Users/dfox/.gradle/caches/artifacts-26/filestore/javax.servlet/servlet-api/2.5/source/21599814ad9a605b86f3e6381571beccd861a32/servlet-api-2.5-sources.jar" kind="lib" path="/Users/dfox/.gradle/caches/artifacts-26/filestore/javax.servlet/servlet-api/2.5/jar/5959582d97d8b61f4d154ca9e495aafd16726e34/servlet-api-2.5.jar" exported="true"/>
+</classpath>

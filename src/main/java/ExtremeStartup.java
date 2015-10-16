@@ -21,15 +21,35 @@ public class ExtremeStartup extends HttpServlet {
 
     String answer(String parameter) {
         if (parameter == null)
-            return "team name";
+            return "A";
 
         Matcher additionMatcher = Pattern.compile(".*what is the sum of (\\d+) and (\\d+)").matcher(parameter);
         if (additionMatcher.matches()) {
             return String.valueOf(Integer.parseInt(additionMatcher.group(1))
                     + Integer.parseInt(additionMatcher.group(2)));
         }
+        
+        Matcher additionMatcher3 = Pattern.compile(".*what is (\\d+) plus (\\d+)").matcher(parameter);
+        if (additionMatcher3.matches()) {
+            return String.valueOf(Integer.parseInt(additionMatcher3.group(1))
+                    + Integer.parseInt(additionMatcher3.group(2)));
+        }
 
-        return "team name";
+        Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (\\*)").matcher(parameter);
+        if (additionMatcher2.matches()) {
+        	return "" + largest(additionMatcher2.group(1));
+        }
+       
+        
+        return "A";
     }
 
+    int largest(String s) {
+    	String [] split = s.split(", ");
+    	int max = Integer.MIN_VALUE;
+    	for (int i = 0; i < split.length; i++) {
+    		max = Math.max(max, Integer.parseInt(split[i]));
+    	}
+    	return max;
+    }
 }
