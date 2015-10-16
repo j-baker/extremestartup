@@ -17,8 +17,13 @@ public class ExtremeStartupTest {
     }
 
     @Test
-    public void should_get_largest() {
+    public void should_get_largest_of_two() {
         assertEquals(server.answer("which of the following numbers is the largest: 12, 15"), "15");
+    }
+
+    @Test
+    public void should_get_largest_of_three() {
+        assertEquals(server.answer("which of the following numbers is the largest: 12, 15, 17"), "17");
     }
 
     @Test
