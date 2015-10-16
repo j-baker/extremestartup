@@ -60,6 +60,18 @@ public class ExtremeStartup extends HttpServlet {
         if (additionMatcher2.matches()) {
         	return "" + largest(additionMatcher2.group(1));
         }
+
+        Matcher j = Pattern.compile(".*which of the following numbers is the largest: (\\\\*)").matcher(parameter);
+        if (j.matches()) {
+        	return "" + whichOneIsSquareAndCube(j.group(1));
+        }
+
+        Matcher k = Pattern.compile(".*who played James Bond in the film Dr No").matcher(parameter);
+        if (k.matches()) {
+        	return "Sean Connery";
+        }
+        
+
        
         System.err.println("Unknown q" + parameter);
         return "A";
@@ -81,5 +93,40 @@ public class ExtremeStartup extends HttpServlet {
     		max = Math.max(max, Integer.parseInt(split[i]));
     	}
     	return max;
+    }
+    boolean isSquare(int i) {
+        int j = 0;
+        while (j*j < i) {
+            j++;
+        }
+        if (j*j == i) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean isCube(int i) {
+        int j = 0;
+        while (j*j*j < i) {
+            j++;
+        }
+        if (j*j*j == i) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean isSquareAndCube(int i) {
+        return isSquare(i) && isSquare(i);
+    }
+
+    String whichOneIsSquareAndCube(String s) {
+        String[] split = s.split(", ");
+        for (int i = 0; i < split.length; i++) {
+            if (isSquareAndCube(Integer.parseInt(split[i]))) {
+                return "" + Integer.parseInt(split[i]);
+            }
+        }
+        return "" + Integer.MAX_VALUE;
     }
 }
