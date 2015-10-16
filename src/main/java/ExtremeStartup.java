@@ -60,6 +60,18 @@ public class ExtremeStartup extends HttpServlet {
         if (additionMatcher2.matches()) {
         	return "" + largest(additionMatcher2.group(1));
         }
+
+        Matcher j = Pattern.compile(".*which of the following numbers is the largest: (\\\\*)").matcher(parameter);
+        if (j.matches()) {
+        	return "" + whichOneIsSquareAndCube(j.group(1));
+        }
+
+        Matcher k = Pattern.compile(".*who played James Bond in the film Dr No").matcher(parameter);
+        if (k.matches()) {
+        	return "Sean Connery";
+        }
+        
+
        
         System.err.println("Unknown q" + parameter);
         return "A";
