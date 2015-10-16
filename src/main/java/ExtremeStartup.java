@@ -64,10 +64,17 @@ public class ExtremeStartup extends HttpServlet {
                     + Integer.parseInt(additionMatcher3.group(2)));
         }
         
+        Matcher additionMatcher4 = Pattern.compile(".*what is (\\d+) plus (\\d+) plus (\\d+)").matcher(parameter);
+        if (additionMatcher4.matches()) {
+            return String.valueOf(Integer.parseInt(additionMatcher4.group(1))
+                    + Integer.parseInt(additionMatcher4.group(2))) + Integer.parseInt(additionMatcher4.group(3));
+        }
+        
+        
         Matcher p = Pattern.compile(".*what is (\\d+) minus (\\d+)").matcher(parameter);
         if (p.matches()) {
-            return String.valueOf(Integer.parseInt(additionMatcher3.group(1))
-                    - Integer.parseInt(additionMatcher3.group(2)));
+            return String.valueOf(Integer.parseInt(p.group(1))
+                    - Integer.parseInt(p.group(2)));
         }
 
         Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (.*)").matcher(parameter);
@@ -89,7 +96,7 @@ public class ExtremeStartup extends HttpServlet {
         
         Matcher c = Pattern.compile(".*which of the following numbers are primes: (.*)").matcher(parameter);
         if (c.matches()) {
-        	return "" + whichOnesArePrimes(j.group(0));
+        	return "" + whichOnesArePrimes(c.group(1));
         }
 
 		Optional<String> d = memoize(".*who is the Prime Minister of Great Britain", "David Cameron", parameter);
@@ -105,14 +112,21 @@ public class ExtremeStartup extends HttpServlet {
         	return "" + fib(new Integer(f.group(1)));
         }
 
+
+        f = Pattern.compile(".*what is the (\\d+)st number in the Fibonacci sequence").matcher(parameter);
+        if (f.matches()) {
+        	return "" + fib(new Integer(f.group(1)));
+        }
+
+        
 		Optional<String> g = memoize(".*what color is a banana", "Yellow", parameter);
 		if (g.isPresent()) {return g.get();}
 		
 
         Matcher h = Pattern.compile(".*what is (\\d+) to the power of (\\d+)").matcher(parameter);
         if (h.matches()) {
-        	Integer num = Integer.parseInt(additionMatcher3.group(0));
-        	Integer num2 =  Integer.parseInt(additionMatcher3.group(1));
+        	Integer num = Integer.parseInt(h.group(1));
+        	Integer num2 =  Integer.parseInt(h.group(2));
             return String.valueOf((int) Math.pow(num, num2));
         }
         
