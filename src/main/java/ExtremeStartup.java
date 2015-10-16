@@ -29,6 +29,15 @@ public class ExtremeStartup extends HttpServlet {
         }
 		return Optional.empty();
     }
+    
+    Optional<String> plus(String parameter) {
+        Matcher additionMatcher3 = Pattern.compile(".*what is (\\d+) plus (\\d+)").matcher(parameter);
+        if (additionMatcher3.matches()) {
+            return Optional.of(String.valueOf(Integer.parseInt(additionMatcher3.group(1))
+                    + Integer.parseInt(additionMatcher3.group(2))));
+        }
+        return Optional.empty();
+    }
 
     String answer(String parameter) {
         if (parameter == null)
@@ -37,6 +46,11 @@ public class ExtremeStartup extends HttpServlet {
 		Optional<String> tryAnswer = tryAnswer(parameter);
 		if (tryAnswer.isPresent()) {
 			return tryAnswer.get();
+		}
+
+		Optional<String> x = multiply(parameter);
+		if (x.isPresent()) {
+			return x.get();
 		}
         
         Matcher additionMatcher3 = Pattern.compile(".*what is (\\d+) plus (\\d+)").matcher(parameter);
@@ -54,7 +68,16 @@ public class ExtremeStartup extends HttpServlet {
         return "A";
     }
 
-    int largest(String s) {
+    private Optional<String> multiply(String parameter) {
+        Matcher additionMatcher3 = Pattern.compile(".*what is (\\d+) multiplied by (\\d+)").matcher(parameter);
+        if (additionMatcher3.matches()) {
+            return Optional.of(String.valueOf(Integer.parseInt(additionMatcher3.group(1))
+                    * Integer.parseInt(additionMatcher3.group(2))));
+        }
+        return Optional.empty();
+	}
+
+	int largest(String s) {
     	String [] split = s.split(", ");
     	int max = Integer.MIN_VALUE;
     	for (int i = 0; i < split.length; i++) {
