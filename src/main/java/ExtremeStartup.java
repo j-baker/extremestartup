@@ -14,10 +14,7 @@ public class ExtremeStartup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String parameter = req.getParameter("q");
-
-        System.out.println("A request has arrived:");
-        System.out.println(parameter);
-
+        System.out.println("Request");
         resp.getWriter().write(answer(parameter));
     }
     
@@ -59,7 +56,7 @@ public class ExtremeStartup extends HttpServlet {
                     + Integer.parseInt(additionMatcher3.group(2)));
         }
 
-        Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (\\*)").matcher(parameter);
+        Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (\\\\*)").matcher(parameter);
         if (additionMatcher2.matches()) {
         	return "" + largest(additionMatcher2.group(1));
         }
