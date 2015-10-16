@@ -20,6 +20,6 @@ public class ExtremeStartupTest {
 
     @Test
     public void should_get_largest() {
-        assertThat(server.answer("which of the following numbers is the largest: 12, 15"), is("15"));
+        assertThat(server.answer("which of the following numbers is the largest: 12, 15, 17"), is("17"));
     }
 }
