@@ -15,7 +15,7 @@ public class ExtremeStartup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String parameter = req.getParameter("q");
-        System.out.println("Request");
+        System.out.println("Request" + parameter);
         
         try {
 			resp.getWriter().write(answer(parameter));
@@ -68,6 +68,29 @@ public class ExtremeStartup extends HttpServlet {
         if (additionMatcher4.matches()) {
             return String.valueOf(Integer.parseInt(additionMatcher4.group(1))
                     + Integer.parseInt(additionMatcher4.group(2))) + Integer.parseInt(additionMatcher4.group(3));
+        }
+        
+        additionMatcher4 = Pattern.compile(".*what is (\\d+) plus (\\d+) multiplied by (\\d+)").matcher(parameter);
+        if (additionMatcher4.matches()) {
+        	Integer a = Integer.parseInt(additionMatcher4.group(1));
+        	Integer b = Integer.parseInt(additionMatcher4.group(2));
+            return String.valueOf(a + b * Integer.parseInt(additionMatcher4.group(3)));
+        }
+
+        additionMatcher4 = Pattern.compile(".*what is (\\d+) multiplied by (\\d+) plus (\\d+)").matcher(parameter);
+        if (additionMatcher4.matches()) {
+        	Integer a = Integer.parseInt(additionMatcher4.group(1));
+        	Integer b = Integer.parseInt(additionMatcher4.group(2));
+        	Integer c =  Integer.parseInt(additionMatcher4.group(3));
+            return String.valueOf(a * b + c);
+        }
+
+        additionMatcher4 = Pattern.compile(".*what is (\\d+) multiplied by (\\d+) multiplied by (\\d+)").matcher(parameter);
+        if (additionMatcher4.matches()) {
+        	Integer a = Integer.parseInt(additionMatcher4.group(1));
+        	Integer b = Integer.parseInt(additionMatcher4.group(2));
+        	Integer c =  Integer.parseInt(additionMatcher4.group(3));
+            return String.valueOf(a * b * c);
         }
         
         
