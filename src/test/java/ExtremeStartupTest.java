@@ -48,4 +48,9 @@ public class ExtremeStartupTest {
     public void should_be_12th_prime() {
         assertThat(server.answer("what is the 12th number in the Fibonacci sequence"), is("144"));
     }
+
+    @Test
+    public void should_be_10th_power_of_7() {
+        assertThat(server.answer("what is 10 to the power of 7"), is("1000000"));
+    }
 }
