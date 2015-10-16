@@ -43,4 +43,9 @@ public class ExtremeStartupTest {
     public void should_be_7th_prime() {
         assertThat(server.answer("what is the 7th number in the Fibonacci sequence"), is("13"));
     }
+
+    @Test
+    public void should_be_12th_prime() {
+        assertThat(server.answer("what is the 12th number in the Fibonacci sequence"), is("144"));
+    }
 }
