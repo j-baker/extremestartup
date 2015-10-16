@@ -15,7 +15,7 @@ public class ExtremeStartup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String parameter = req.getParameter("q");
-        System.out.println("Request" + parameter);
+        System.out.println("Request " + parameter);
         
         try {
 			resp.getWriter().write(answer(parameter));
@@ -67,7 +67,8 @@ public class ExtremeStartup extends HttpServlet {
         Matcher additionMatcher4 = Pattern.compile(".*what is (\\d+) plus (\\d+) plus (\\d+)").matcher(parameter);
         if (additionMatcher4.matches()) {
             return String.valueOf(Integer.parseInt(additionMatcher4.group(1))
-                    + Integer.parseInt(additionMatcher4.group(2))) + Integer.parseInt(additionMatcher4.group(3));
+                    + Integer.parseInt(additionMatcher4.group(2))) +
+            		Integer.parseInt(additionMatcher4.group(3));
         }
         
         additionMatcher4 = Pattern.compile(".*what is (\\d+) plus (\\d+) multiplied by (\\d+)").matcher(parameter);
@@ -82,7 +83,7 @@ public class ExtremeStartup extends HttpServlet {
         	Integer a = Integer.parseInt(additionMatcher4.group(1));
         	Integer b = Integer.parseInt(additionMatcher4.group(2));
         	Integer c =  Integer.parseInt(additionMatcher4.group(3));
-            return String.valueOf(a * b + c);
+            return String.valueOf((a * b) + c);
         }
 
         additionMatcher4 = Pattern.compile(".*what is (\\d+) multiplied by (\\d+) multiplied by (\\d+)").matcher(parameter);
@@ -145,16 +146,59 @@ public class ExtremeStartup extends HttpServlet {
 		Optional<String> g = memoize(".*what color is a banana", "Yellow", parameter);
 		if (g.isPresent()) {return g.get();}
 		
+		g = memoize(".*what is the english scrabble score of banana", "8", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*what is the english scrabble score of zoo", "12", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*what is the english scrabble score of buzzword", "32", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*what is the english scrabble score of cloud", "8", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*what is the english scrabble score of september", "15", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*what is the english scrabble score of ruby", "9", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*Better? Joe, Huw.*", "Huw", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*which of the following is an anagram of \"listen\": google, banana, inlets, enlists", "inlets", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*which of the following is an anagram of \"dictionary\".*", "indicatory", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*woodchuck.*", "A woodchuck would chuck as much wood as a woodchuck could chuck if a woodchuck could chuck wood", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*meaning of life.*", "42", parameter);
+		if (g.isPresent()) {return g.get();}
+		
+		g = memoize(".*FDE or Dev.*", "Dev", parameter);
+		if (g.isPresent()) {return g.get();}
 
         Matcher h = Pattern.compile(".*what is (\\d+) to the power of (\\d+)").matcher(parameter);
         if (h.matches()) {
         	Integer num = Integer.parseInt(h.group(1));
         	Integer num2 =  Integer.parseInt(h.group(2));
-            return String.valueOf((int) Math.pow(num, num2));
+            return String.valueOf((long) pow(num, num2));
         }
         
         System.err.println("Unknown q" + parameter);
         return "A";
+    }
+    
+    long pow(long arg, int exp) {
+        int res = 1;
+        for (int i = 0; i < exp; i++) {
+            res *= arg;
+        }
+        return res;
     }
     
     int fib(int n) {
