@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,16 +20,24 @@ public class ExtremeStartup extends HttpServlet {
 
         resp.getWriter().write(answer(parameter));
     }
+    
+    Optional<String> tryAnswer(String parameter) {
+        Matcher additionMatcher = Pattern.compile(".*what is the sum of (\\d+) and (\\d+)").matcher(parameter);
+        if (additionMatcher.matches()) {
+            return Optional.of(String.valueOf(Integer.parseInt(additionMatcher.group(1))
+                    + Integer.parseInt(additionMatcher.group(2))));
+        }
+		return Optional.empty();
+    }
 
     String answer(String parameter) {
         if (parameter == null)
             return "A";
 
-        Matcher additionMatcher = Pattern.compile(".*what is the sum of (\\d+) and (\\d+)").matcher(parameter);
-        if (additionMatcher.matches()) {
-            return String.valueOf(Integer.parseInt(additionMatcher.group(1))
-                    + Integer.parseInt(additionMatcher.group(2)));
-        }
+		Optional<String> tryAnswer = tryAnswer(parameter);
+		if (tryAnswer.isPresent()) {
+			return tryAnswer.get();
+		}
         
         Matcher additionMatcher3 = Pattern.compile(".*what is (\\d+) plus (\\d+)").matcher(parameter);
         if (additionMatcher3.matches()) {
@@ -40,7 +50,7 @@ public class ExtremeStartup extends HttpServlet {
         	return "" + largest(additionMatcher2.group(1));
         }
        
-        
+        System.err.println("Unknown q" + parameter);
         return "A";
     }
 
