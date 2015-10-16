@@ -1,8 +1,6 @@
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-
 import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
 
 public class ExtremeStartupTest {
 
@@ -10,16 +8,16 @@ public class ExtremeStartupTest {
 
     @Test
     public void should_accept_missing_input() {
-        assertThat(server.answer(null), equalTo("team name"));
+        assertEquals(server.answer(null), "A");
     }
 
     @Test
     public void should_add_numbers() {
-        assertThat(server.answer("what is the sum of 14 and 4"), equalTo("18"));
+        assertEquals(server.answer("what is the sum of 14 and 4"), "18");
     }
 
     @Test
     public void should_get_largest() {
-        assertThat(server.answer("which of the following numbers is the largest: 12, 15"), is("15"));
+        assertEquals(server.answer("which of the following numbers is the largest: 12, 15"), "15");
     }
 }
