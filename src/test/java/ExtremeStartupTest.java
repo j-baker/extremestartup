@@ -1,3 +1,6 @@
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -34,7 +37,7 @@ public class ExtremeStartupTest {
     @Test
     public void should_get_largest() {
         assertThat(server.answer("which of the following numbers is the largest: 12, 15, 17"), is("17"));
-
+    }
 
     @Test
     public void shoud_be_sean_connery() {

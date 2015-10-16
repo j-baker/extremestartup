@@ -57,13 +57,19 @@ public class ExtremeStartup extends HttpServlet {
             return String.valueOf(Integer.parseInt(additionMatcher3.group(1))
                     + Integer.parseInt(additionMatcher3.group(2)));
         }
+        
+        Matcher p = Pattern.compile(".*what is (\\d+) minus (\\d+)").matcher(parameter);
+        if (p.matches()) {
+            return String.valueOf(Integer.parseInt(additionMatcher3.group(1))
+                    - Integer.parseInt(additionMatcher3.group(2)));
+        }
 
-        Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (\\\\*)").matcher(parameter);
+        Matcher additionMatcher2 = Pattern.compile(".*which of the following numbers is the largest: (\\*)").matcher(parameter);
         if (additionMatcher2.matches()) {
         	return "" + largest(additionMatcher2.group(1));
         }
 
-        Matcher j = Pattern.compile(".*which of the following numbers is the largest: (\\*)").matcher(parameter);
+        Matcher j = Pattern.compile(".*which of the following numbers is both a square and a cube: (\\*)").matcher(parameter);
         if (j.matches()) {
         	return "" + whichOneIsSquareAndCube(j.group(1));
         }
@@ -82,9 +88,28 @@ public class ExtremeStartup extends HttpServlet {
 
 		Optional<String> d = memoize(".*who is the Prime Minister of Great Britain", "David Cameron", parameter);
 		if (d.isPresent()) {return d.get();}
+		
+		Optional<String> e = memoize(".*what is the 7th number in the Fibonacci sequence", "13", parameter);
+		if (e.isPresent()) {return e.get();}
+		
+
+        Matcher f = Pattern.compile(".*what is the (\\d)th number in the Fibonacci sequence").matcher(parameter);
+        if (f.matches()) {
+        	return "" + fib(new Integer(f.group(1)));
+        }
         
         System.err.println("Unknown q" + parameter);
         return "A";
+    }
+    
+    int fib(int n) {
+        if (n == 1) {
+            return 1;
+        } else if (n == 2) {
+            return 1;
+        } else {
+            return fib(n-1) + fib(n-2);
+        }
     }
 
     private Optional<String> memoize(String string, String string2, String parameter) {
